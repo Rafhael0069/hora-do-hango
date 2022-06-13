@@ -1,0 +1,7 @@
+{
+  "name": "Hora do Rango",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
