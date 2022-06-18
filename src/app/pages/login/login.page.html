@@ -4,7 +4,18 @@
       <ion-img class="img-logo" src="../../../assets/icon/logo.png"></ion-img>
     </div>
 
-    <form class="login" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <ion-item fill="solid" class="input ion-margin-bottom">
+        <ion-input type="email" class="input-field" placeholder="Email" formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email is invalid</ion-note>
+      </ion-item>
+      <ion-item fill="solid" class="input ion-margin-bottom">
+        <ion-input type="password" class="input-field" placeholder="Password" formControlName="password"></ion-input>
+        <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Password needs to be 6
+          characters</ion-note>
+      </ion-item>
+      <!--
       <div class="input">
         <input type="email" class="input-field"  formControlName="email" required />
         <label class="input-label">Email</label>
@@ -12,11 +23,12 @@
       <div class="input">
         <input type="password" class="input-field" formControlName="password"  required />
         <label class="input-label">Password</label>
-      </div>
+      </div> -->
+      <ion-button class="button-entrar" fill="outline" [disabled]="loginForm.invalid">Entrar</ion-button>
+
     </form>
-    <ion-button class="button-entrar" fill="outline"
-    [routerLink]="['/home']" [disabled]="loginForm.invalid" >Entrar</ion-button>
-    <p>Não tem conta ainda, <a [routerLink]="['/create-user']" >Cadastre-se</a></p>
+
+    <p>Não tem conta ainda, <a [routerLink]="['/create-user']">Cadastre-se</a></p>
 
   </div>
 </ion-content>
