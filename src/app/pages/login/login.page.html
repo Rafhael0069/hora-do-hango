@@ -1,23 +1,22 @@
-<ion-header>
-</ion-header>
-
 <ion-content>
   <div class="content">
     <div class="logo">
       <ion-img class="img-logo" src="../../../assets/icon/logo.png"></ion-img>
     </div>
-    <div class="form-login">
-      <div class="input-group">
-        <label for="email">E-mail</label><br>
-        <input name="email" type="email">
-      </div>
-      <div class="input-group">
-        <label for="password">Senha</label><br>
-        <input name="password" type="password">
-      </div>
-      <ion-button>Entrar</ion-button>
-      <p>Não tem conta ainda, <a href="">Cadastre-se</a></p>
-    </div>
-  </div>
 
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      <div class="input">
+        <input type="email" class="input-field"  formControlName="email" required />
+        <label class="input-label">Email</label>
+      </div>
+      <div class="input">
+        <input type="password" class="input-field" formControlName="password"  required />
+        <label class="input-label">Password</label>
+      </div>
+    </form>
+    <ion-button class="button-entrar" fill="outline"
+    [routerLink]="['/home']" [disabled]="loginForm.invalid" >Entrar</ion-button>
+    <p>Não tem conta ainda, <a [routerLink]="['/create-user']" >Cadastre-se</a></p>
+
+  </div>
 </ion-content>

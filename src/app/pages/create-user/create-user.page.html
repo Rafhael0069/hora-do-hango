@@ -1,9 +1,64 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>create-user</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="content">
+    <div class="img-perfil">
+      <div class="view-img">
+        <ion-img id="img-fotos" [src]="photoService.imgPhotoUrl"></ion-img>
+      </div>
+      <ion-fab-button class="take-picture" (click)="addPhotoToGallery()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </div>
+    <form class="login" [formGroup]="registerForm" (ngSubmit)="submitForm()">
+      <div class="input">
+        <input type="text" class="input-field" required formControlName="name"/>
+        <label class="input-label">Nome Complpeto</label>
+      </div>
+      <div class="input">
+        <input type="number" class="input-field" required formControlName="age"/>
+        <label class="input-label">Idade</label>
+      </div>
+      <div class="input">
+        <input type="text" class="input-field" required formControlName="email"/>
+        <label class="input-label">Email</label>
+      </div>
+      <div class="input">
+        <input type="password" class="input-field" required formControlName="password"/>
+        <label class="input-label">Senha</label>
+      </div>
+      <div class="input">
+        <input type="password" class="input-field" required formControlName="confirmPassword"/>
+        <label class="input-label">Confirme sua senha</label>
+    </div>
 
+
+
+      <!-- <ion-item class="input">
+        <ion-input type="text" class="input-field" required formControlName="name"></ion-input>
+        <label class="input-label">Nome Complpeto</label>
+      </ion-item>
+      <ion-item class="input">
+        <ion-input type="number" class="input-field" required formControlName="age"></ion-input>
+        <label class="input-label">Idade</label>
+      </ion-item>
+      <ion-item class="input">
+        <ion-input type="text" class="input-field" required formControlName="email"></ion-input>
+        <label class="input-label">Email</label>
+      </ion-item>
+      <ion-item class="input">
+        <ion-input type="password" class="input-field" required formControlName="password"></ion-input>
+        <label class="input-label">Senha</label>
+      </ion-item>
+      <ion-item class="input">
+        <ion-input type="password" class="input-field" required formControlName="confirmPassword"></ion-input>
+        <label class="input-label">Confirme sua senha</label>
+      </ion-item> -->
+
+
+
+    </form>
+
+
+    <ion-button class="button" fill="outline" [disabled]="registerForm.invalid">Criar conta</ion-button>
+    <ion-button class="button" fill="outline" [routerLink]="['/login']">Cancelar</ion-button>
+  </div>
 </ion-content>
