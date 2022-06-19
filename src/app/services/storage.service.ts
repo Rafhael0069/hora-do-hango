@@ -10,15 +10,13 @@ import {
 import { Photo } from '@capacitor/camera';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class AvatarService {
-  constructor(
-    private auth: Auth,
-    private firestore: Firestore,
-    private storage: Storage
-  ) {}
+export class StorageService {
 
+  constructor(private auth: Auth,
+    private firestore: Firestore,
+    private storage: Storage) { }
   getUserProfile() {
     const user = this.auth.currentUser;
     const userDocRef = doc(this.firestore, `users/${user.uid}`);
@@ -38,20 +36,6 @@ export class AvatarService {
       const userDocRef = doc(this.firestore, `users/${user.uid}`);
       await setDoc(userDocRef, {
         imageUrl,
-      });
-      return true;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  async uploadDados(nome: string, email: string, imageUrl: string) {
-    const user = this.auth.currentUser;
-
-    try {
-      const userDocRef = doc(this.firestore, `users/${user.uid}`);
-      await setDoc(userDocRef, {
-        nome, email, imageUrl
       });
       return true;
     } catch (e) {

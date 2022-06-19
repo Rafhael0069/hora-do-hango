@@ -43,12 +43,14 @@ export class LoginPage implements OnInit {
     await loading.present();
 
     const user = await this.authService.login(this.loginForm.value);
-    await loading.dismiss();
 
     if (user) {
+      await loading.dismiss();
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
-      this.presentAlert('Login failed', 'Please try again!');
+      this.loginForm.controls.password.setValue(null);
+      this.presentAlert('Falha no login', 'Por favor, tente novamente!');
+      await loading.dismiss();
     }
   }
 
@@ -62,7 +64,7 @@ export class LoginPage implements OnInit {
   }
 
   async ngOnInit() {
-    //this.loginForm.controls.email.setValue('rafhael@teste.com');
-    //this.loginForm.controls.password.setValue('123456');
+    this.loginForm.controls.email.setValue('rafhael@teste.com');
+    this.loginForm.controls.password.setValue('123456');
   }
 }

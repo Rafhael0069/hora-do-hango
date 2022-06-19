@@ -14,7 +14,7 @@ import { CreateUserPage } from './create-user.page';
     FormsModule,
     IonicModule,
     CreateUserPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [CreateUserPage]
 })

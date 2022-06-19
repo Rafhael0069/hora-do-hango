@@ -8,12 +8,11 @@
 
       <ion-item fill="solid" class="input ion-margin-bottom">
         <ion-input type="email" class="input-field" placeholder="Email" formControlName="email"></ion-input>
-        <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email is invalid</ion-note>
+        <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email inválido</ion-note>
       </ion-item>
       <ion-item fill="solid" class="input ion-margin-bottom">
         <ion-input type="password" class="input-field" placeholder="Password" formControlName="password"></ion-input>
-        <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Password needs to be 6
-          characters</ion-note>
+        <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">A senha precisa ter 6 caracteres</ion-note>
       </ion-item>
       <!--
       <div class="input">
@@ -24,7 +23,7 @@
         <input type="password" class="input-field" formControlName="password"  required />
         <label class="input-label">Password</label>
       </div> -->
-      <ion-button class="button-entrar" fill="outline" [disabled]="loginForm.invalid">Entrar</ion-button>
+      <ion-button type="submit" class="button-entrar" fill="outline" [disabled]="loginForm.invalid">Entrar</ion-button>
 
     </form>
 
