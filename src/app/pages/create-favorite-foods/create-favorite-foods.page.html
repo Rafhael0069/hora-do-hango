@@ -5,5 +5,43 @@
 </ion-header>
 
 <ion-content>
+  <div class="content">
+    <div class="img-perfil">
 
+      <ion-avatar>
+        <!-- <ion-img id="imageViewPerfil" *ngIf="photoService?.imgPhotoUrl; else placheolder_avatar;" [src]="{imageUrlView}"></ion-img> -->
+        <ng-template #placheolder_avatar>
+          <ion-fab-button class="fallback">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ng-template>
+      </ion-avatar>
+
+      <!-- <div class="view-img">
+        <ion-img id="img-fotos" [src]="photoService.imgPhotoUrl"></ion-img>
+      </div>
+      <ion-fab-button class="take-picture" (click)="addPhotoToGallery()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button> -->
+    </div>
+
+    <form class="form-main" [formGroup]="foodForm" (ngSubmit)="registerFood()">
+      <div class="fields">
+        <ion-item>
+          <ion-label position="floating">Nome do prato</ion-label>
+          <ion-input type="text" class="input-field" formControlName="nameFood"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Pricioais ingredientes</ion-label>
+          <ion-textarea rows="6" type="area" class="input-field" formControlName="mainIngredients"></ion-textarea>
+        </ion-item>
+      </div>
+
+      <div class="buttons">
+        <ion-button type="submit" class="button" fill="outline" [disabled]="foodForm.invalid">Registrar</ion-button>
+        <ion-button class="button" fill="outline"(click)="openPageHome()" >Cancelar</ion-button>
+      </div>
+    </form>
+  </div>
 </ion-content>

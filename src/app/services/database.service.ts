@@ -70,6 +70,19 @@ export class DatabaseService {
     }
   }
 
+  async uploadDadosComida(endereco: string, nameFood: string, mainIngredients: string, userUid: string) {
+    try {
+      const userDocRef = doc(this.firestore, endereco);
+      await setDoc(userDocRef, {
+        nameFood, mainIngredients, userUid
+      });
+      return true;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
   async updateDados(endereco: string, name: string, email: string) {
     const user = this.auth.currentUser;
     try {

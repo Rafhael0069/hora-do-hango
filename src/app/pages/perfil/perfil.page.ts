@@ -4,12 +4,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import {
-  NavController,
   AlertController,
   LoadingController,
 } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
-import { AvatarService } from 'src/app/services/avatar.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
@@ -25,14 +22,11 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private auth: Auth,
-    private avatarService: AvatarService,
     public photoService: PhotoService,
     private dbService: DatabaseService,
-    private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
     private loadingController: LoadingController,
-    private authService: AuthService,
     private router: Router
   ) {
     this.user = this.auth.currentUser;
@@ -40,7 +34,6 @@ export class PerfilPage implements OnInit {
       .getUserProfile(`usuarios/${this.user.uid}`)
       .subscribe((data) => {
         this.profile = data;
-        console.log(this.profile);
         this.preenchendoCampos(data);
       });
 
@@ -48,10 +41,6 @@ export class PerfilPage implements OnInit {
       name: [null],
       email: [null],
     });
-
-    if (this.profile) {
-      this.preenchendoCampos(this.profile);
-    }
   }
 
   async changeImage() {

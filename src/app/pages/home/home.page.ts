@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { Auth, user } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertController, LoadingController, MenuController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  MenuController,
+} from '@ionic/angular';
 import { DataUser } from 'src/app/models/data-user';
 import { AuthService } from 'src/app/services/auth.service';
 import { AvatarService } from 'src/app/services/avatar.service';
@@ -15,11 +19,14 @@ import { PhotoService } from 'src/app/services/photo.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  profile = {
+    name: '',
+    imageUrl:''
+  };
+  user;
 
-  image;
-  profile = null;
-
-  constructor(private menu: MenuController,
+  constructor(
+    private menu: MenuController,
     private avatarService: AvatarService,
     private authService: AuthService,
     private auth: Auth,
@@ -27,27 +34,28 @@ export class HomePage {
     private dbService: DatabaseService,
     private router: Router,
     private loadingController: LoadingController,
-    private alertController: AlertController) {
-      this.avatarService.getUserProfile().subscribe((data) => {
-        this.profile = data;
+    private alertController: AlertController
+  ) {
+    this.user = this.auth.currentUser;
+    this.dbService
+      .getUserProfile(`usuarios/${this.user.uid}`)
+      .subscribe((data) => {
+        this.profile.name = data.name;
+        this.profile.imageUrl = data.imageUrl;
       });
-    }
+  }
 
   async logout() {
     await this.authService.logout();
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
-  openPagePerfil(){
+  openPagePerfil() {
     this.router.navigateByUrl('/perfil', { replaceUrl: true });
   }
 
-  openPageFavoriteFoods(){
-    this.router.navigateByUrl('/favorite-foods', { replaceUrl: true });
-  }
-
-  openPageEspecialVote(){
-    this.router.navigateByUrl('/vote-favorite', { replaceUrl: true });
+  openPageFavoriteFoods() {
+    this.router.navigateByUrl('/create-favorite-foods', { replaceUrl: true });
   }
 
   openFirst() {
@@ -63,5 +71,4 @@ export class HomePage {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
-
 }

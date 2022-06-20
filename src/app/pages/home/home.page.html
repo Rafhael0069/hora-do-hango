@@ -1,19 +1,16 @@
 <ion-app>
   <ion-menu side="start" content-id="main-content">
-    <ion-header>
-      <ion-toolbar translucent>
-        <ion-title>Hora do Rango</ion-title>
-      </ion-toolbar>
+    <ion-header class="header">
+      <ion-avatar>
+        <img id="imageHome" [src]="profile.imageUrl" />
+      </ion-avatar>
+      <ion-title id="homeTitle" >{{profile.name}}</ion-title>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-item (click)="openPagePerfil()">
           <ion-icon name="person-outline"></ion-icon>
           <ion-label>Perfil</ion-label>
-        </ion-item>
-        <ion-item (click)="openPageEspecialVote()">
-          <ion-icon name="checkbox-outline"></ion-icon>
-          <ion-label>Votar Especial</ion-label>
         </ion-item>
         <ion-item (click)="openPageFavoriteFoods()">
           <ion-icon name="star-outline"></ion-icon>

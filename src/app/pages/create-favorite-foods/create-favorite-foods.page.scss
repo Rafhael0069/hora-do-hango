@@ -1,0 +1,92 @@
+.content {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-perfil {
+  display: flex;
+  width: 100%;
+  height: 40%;
+  justify-content: center;
+}
+
+ion-avatar {
+  width: 200px;
+  height: 200px;
+}
+
+.fallback {
+  width: 200px;
+  height: 200px;
+  border-radius: 5%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-main {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-main .fields {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-main .fields ion-item{
+  width: 94%;
+}
+
+.form-main .fields ion-item ion-label,
+.form-main .fields ion-item ion-input{
+  font-size: 1.5rem;
+}
+
+
+.form-main .buttons {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.form-main .buttons ion-button {
+  width: 90%;
+  height: 50px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1.5rem;
+}
+
+
+.input {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  background-color: transparent;
+  font-size: 1.5rem;
+  padding: 0.25rem 0;
+}
+
+ion-note {
+  font-size: 1.25rem;
+}

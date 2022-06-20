@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorite-foods',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoriteFoodsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,) { }
+
+  openPagecreateFavoriteFoods() {
+    this.router.navigateByUrl('/create-favorite-foods', { replaceUrl: true });
+  }
 
   ngOnInit() {
   }

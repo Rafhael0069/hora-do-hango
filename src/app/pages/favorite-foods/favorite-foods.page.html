@@ -1,9 +1,19 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>favorite-foods</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<div class="content">
+  <div class="list-foods">
 
+  </div>
+  <div class="footer">
+    <ion-button class="button" fill="outline" (click)="openPagecreateFavoriteFoods()">Cadastrar Comida Favorita</ion-button>
+  </div>
+</div>
 </ion-content>

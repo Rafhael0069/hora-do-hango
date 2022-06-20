@@ -7,26 +7,22 @@
   --width: 500px;
 }
 
-
-ion-avatar {
-  width: 128px;
-  height: 128px;
-}
-
-.preview {
-  margin-top: 50px;
+.header{
   display: flex;
-  justify-content: center;
-}
-
-.fallback {
-  width: 128px;
-  height: 128px;
-  border-radius: 50%;
-  background: #bfbfbf;
-
-  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-weight: 500;
 }
+
+.header ion-avatar {
+
+  width: 200px;
+  height: 200px;
+  margin: 10px 0;
+}
+
+.header ion-title {
+  font-size: 2rem;
+  margin: 5px 0;
+}
+
