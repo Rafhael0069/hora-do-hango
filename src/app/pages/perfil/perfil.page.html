@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="content">
+    <div class="img-perfil">
+
+      <ion-avatar (click)="changeImage()">
+        <img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
+        <ng-template #placheolder_avatar>
+          <ion-fab-button class="fallback">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ng-template>
+      </ion-avatar>
+    </div>
+
+    <form class="login" [formGroup]="perfilForm" (ngSubmit)="saveDataUser()">
+
+      <ion-item fill="solid" class="input ion-margin-bottom">
+        <ion-input type="text" class="input-field" placeholder="Nome Completo" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item fill="solid" class="input ion-margin-bottom">
+        <ion-input type="email" class="input-field" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" class="button" fill="outline">Salvar alterações</ion-button>
+      <ion-button class="button" fill="outline" (click)="openPageHome()">Cancelar</ion-button>
+    </form>
+  </div>
 
 </ion-content>

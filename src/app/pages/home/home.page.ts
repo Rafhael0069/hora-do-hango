@@ -38,9 +38,17 @@ export class HomePage {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
+  openPagePerfil(){
+    this.router.navigateByUrl('/perfil', { replaceUrl: true });
+  }
 
+  openPageFavoriteFoods(){
+    this.router.navigateByUrl('/favorite-foods', { replaceUrl: true });
+  }
 
-
+  openPageEspecialVote(){
+    this.router.navigateByUrl('/vote-favorite', { replaceUrl: true });
+  }
 
   openFirst() {
     this.menu.enable(true, 'first');

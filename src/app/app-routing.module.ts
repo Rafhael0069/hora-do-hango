@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'create-favorite-foods',
     loadChildren: () => import('./pages/create-favorite-foods/create-favorite-foods.module').then( m => m.CreateFavoriteFoodsPageModule)
   },
+  {
+    path: 'vote-favorite',
+    loadChildren: () => import('./pages/vote-favorite/vote-favorite.module').then( m => m.VoteFavoritePageModule)
+  },
 ];
 
 @NgModule({

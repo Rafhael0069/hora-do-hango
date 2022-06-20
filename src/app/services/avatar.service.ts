@@ -26,6 +26,7 @@ export class AvatarService {
   }
 
   async uploadImage(cameraFile: Photo) {
+
     const user = this.auth.currentUser;
     const path = `uploads/${user.uid}/profile.png`;
     const storageRef = ref(this.storage, path);
