@@ -3,10 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import {
-  AlertController,
-  LoadingController,
-} from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
@@ -18,6 +15,8 @@ import { PhotoService } from 'src/app/services/photo.service';
 export class PerfilPage implements OnInit {
   perfilForm: FormGroup;
   profile = null;
+  image = null;
+  imageUrlView = null;
   user;
 
   constructor(
@@ -34,6 +33,7 @@ export class PerfilPage implements OnInit {
       .getUserProfile(`usuarios/${this.user.uid}`)
       .subscribe((data) => {
         this.profile = data;
+        this.imageUrlView = this.profile.imageUrl;
         this.preenchendoCampos(data);
       });
 
@@ -44,54 +44,52 @@ export class PerfilPage implements OnInit {
   }
 
   async changeImage() {
-    const image = await Camera.getPhoto({
+
+    this.image = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
       quality: 100,
     });
 
-    if (image) {
-      const loading = await this.loadingController.create();
-      await loading.present();
-      const pathImg = `imageUsuarios/${this.user.uid}${this.user.uid}.png`;
-      const pathUserData = `usuarios/${this.user.uid}`;
+    this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
 
-      const result = await this.dbService.uploadImage(
-        image,
-        pathImg,
-        pathUserData
-      );
-      loading.dismiss();
-
-      if (!result) {
-        await loading.dismiss();
-        this.presentAlert(
-          'Falha ao salvar imagem',
-          'Por favor, tente novamente!'
-        );
-      }
-    }
   }
 
   async saveDataUser() {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const result = await this.dbService.updateDados(
-      `usuarios/${this.user.uid}`,
-      this.perfilForm.value.name,
-      this.perfilForm.value.email
+    const imgName = `${this.user.uid}.png`;
+    const pathUserData = `usuarios/${this.user.uid}`;
+    const imgUrl = await this.dbService.uploadImage(
+      this.image,
+      `imageUsuarios/${this.user.uid}${imgName}.png`
     );
-    if (result) {
-      await loading.dismiss();
-      this.openPageHome();
+    if (imgUrl) {
+      const result = await this.dbService.uploadDados(
+        pathUserData,
+        this.perfilForm.value.name,
+        this.perfilForm.value.email,
+        imgUrl
+      );
+      if (result) {
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+        await loading.dismiss();
+      } else {
+        await loading.dismiss();
+        this.presentAlert(
+          'Falha ao salvar dados de usuário',
+          'Por favor, tente novamente!'
+        );
+      }
     } else {
       await loading.dismiss();
       this.presentAlert(
-        'Falha ao salvar dados de usuário',
+        'Falha ao salvar imagem',
         'Por favor, tente novamente!'
       );
     }
+
   }
 
   openPageHome() {

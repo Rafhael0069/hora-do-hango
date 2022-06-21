@@ -79,12 +79,12 @@ export class CreateUserPage implements OnInit {
 
     const user = await this.authService.register(this.registerForm.value);
     if (user) {
-      const result = await this.dbService.uploadDados(
+      /*const result = await this.dbService.uploadDados(
         `usuarios/${user.user.uid}`,
         this.registerForm.value.name,
-        this.registerForm.value.email,
+        this.registerForm.value.email
       );
-      if (result) {
+       if (result) {
         this.router.navigateByUrl('/home', { replaceUrl: true });
         await loading.dismiss();
       } else {
@@ -93,15 +93,16 @@ export class CreateUserPage implements OnInit {
           'Falha ao salvar dados de usuário',
           'Por favor, tente novamente!'
         );
-      }
-      /* const imgName = `${user.user.uid}.png`;
+      } */
+      const imgName = `${user.user.uid}.png`;
+      const pathUserData = `usuarios/${user.user.uid}`;
       const imgUrl = await this.dbService.uploadImage(
         this.image,
         `imageUsuarios/${user.user.uid}${imgName}.png`
       );
       if (imgUrl) {
         const result = await this.dbService.uploadDados(
-          `usuarios/${user.user.uid}`,
+          pathUserData,
           this.registerForm.value.name,
           this.registerForm.value.email,
           imgUrl
@@ -122,7 +123,7 @@ export class CreateUserPage implements OnInit {
           'Falha ao salvar imagem',
           'Por favor, tente novamente!'
         );
-      } */
+      }
     } else {
       await loading.dismiss();
       this.presentAlert(
@@ -163,6 +164,8 @@ export class CreateUserPage implements OnInit {
       source: CameraSource.Camera,
       quality: 100,
     });
+
+    this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
 
     /* const image = this.photoService.addNewToGallery();
 

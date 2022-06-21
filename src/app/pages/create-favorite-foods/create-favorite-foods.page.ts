@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import {
-  NavController,
   AlertController,
   LoadingController,
 } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
-import { AvatarService } from 'src/app/services/avatar.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
@@ -20,16 +18,16 @@ import { PhotoService } from 'src/app/services/photo.service';
 export class CreateFavoriteFoodsPage implements OnInit {
   user;
   foodForm: FormGroup;
+  image = null;
+  imageUrlView = null;
+
   constructor(
     private auth: Auth,
-    private avatarService: AvatarService,
     public photoService: PhotoService,
     private dbService: DatabaseService,
-    private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
     private loadingController: LoadingController,
-    private authService: AuthService,
     private router: Router
   ) {
     this.user = this.auth.currentUser;
@@ -41,27 +39,64 @@ export class CreateFavoriteFoodsPage implements OnInit {
   }
 
   async registerFood() {
-    const loading = await this.loadingController.create();
-    await loading.present();
+    if(this.image != null){
+      const loading = await this.loadingController.create();
+      await loading.present();
 
-    const dataAtual = Date.now();
+      const imageName = this.imageName();
 
-    const result = await this.dbService.uploadDadosComida(
-      `comidas/${this.user.uid}`,
-      this.foodForm.value.nameFood,
-      this.foodForm.value.mainIngredients,
-      this.user.uid,
-    );
-    if (result) {
-      this.router.navigateByUrl('/favorite-foods', { replaceUrl: true });
-      await loading.dismiss();
-    } else {
-      await loading.dismiss();
+      const timeElapsed = Date.now();
+      const today = new Date(timeElapsed);
+
+      const pathFoodData = `comidas/${imageName}.png`;
+      const imgUrl = await this.dbService.uploadImage(this.image, pathFoodData);
+      if (imgUrl) {
+        const result = await this.dbService.uploadDadosComida(
+          `comidas/${imageName}`,
+          this.foodForm.value.nameFood,
+          this.foodForm.value.mainIngredients,
+          today.toLocaleDateString(),
+          this.user.uid
+        );
+        if (result) {
+          this.router.navigateByUrl('/home', { replaceUrl: true });
+          await loading.dismiss();
+        } else {
+          await loading.dismiss();
+          this.presentAlert(
+            'Falha ao salvar comida favorita',
+            'Por favor, tente novamente!'
+          );
+        }
+      } else {
+        await loading.dismiss();
+        this.presentAlert(
+          'Falha ao salvar imagem',
+          'Por favor, tente novamente!'
+        );
+      }
+    }else{
       this.presentAlert(
-        'Falha ao salvar comida favorita',
-        'Por favor, tente novamente!'
+        'Imagem nâo selecionada',
+        'Por favor, selecione uma imagen antes de continuar!'
       );
     }
+
+  }
+
+  async choseImage() {
+    this.image = await Camera.getPhoto({
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera,
+      quality: 100,
+    });
+
+    this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
+  }
+
+  imageName() {
+    const newTime = Math.floor(Date.now() / 1000);
+    return Math.floor(Math.random() * 20) + newTime;
   }
 
   ngOnInit() {}

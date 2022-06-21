@@ -2,14 +2,14 @@
   <div class="content">
     <div class="img-perfil">
 
-    <!--   <ion-avatar (click)="changeImage()">
-        <ion-img id="imageViewPerfil" *ngIf="photoService?.imgPhotoUrl; else placheolder_avatar;" [src]="{imageUrlView}"></ion-img>
+      <ion-avatar (click)="changeImage()">
+        <ion-img id="imageViewPerfil" *ngIf="imageUrlView !== null; else placheolder_avatar;" [src]="imageUrlView"></ion-img>
         <ng-template #placheolder_avatar>
           <ion-fab-button class="fallback">
             <ion-icon name="camera"></ion-icon>
           </ion-fab-button>
         </ng-template>
-      </ion-avatar> -->
+      </ion-avatar>
 
       <!-- <div class="view-img">
         <ion-img id="img-fotos" [src]="photoService.imgPhotoUrl"></ion-img>
