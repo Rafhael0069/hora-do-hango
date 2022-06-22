@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
 
   openPageDetails(id: string) {
     const navigationExtras: NavigationExtras = {
-      queryParams: {idFood: id}
+      queryParams: {uidFood: id}
     };
     this.navCtrl.navigateForward(['food-details'], navigationExtras);
     //this.router.navigateByUrl('/food-details', { replaceUrl: true });
