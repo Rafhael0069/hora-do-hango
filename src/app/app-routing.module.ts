@@ -8,8 +8,8 @@ import {
 } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-//const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['create-favorite-foods']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+//const redirectLoggedInToHome = () => redirectLoggedInTo(['create-favorite-foods']);
 
 const routes: Routes = [
   {
@@ -36,16 +36,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
   {
-    path: 'favorite-foods',
-    loadChildren: () => import('./pages/favorite-foods/favorite-foods.module').then( m => m.FavoriteFoodsPageModule)
-  },
-  {
     path: 'create-favorite-foods',
     loadChildren: () => import('./pages/create-favorite-foods/create-favorite-foods.module').then( m => m.CreateFavoriteFoodsPageModule)
   },
   {
-    path: 'vote-favorite',
-    loadChildren: () => import('./pages/vote-favorite/vote-favorite.module').then( m => m.VoteFavoritePageModule)
+    path: 'food-details',
+    loadChildren: () => import('./pages/food-details/food-details.module').then( m => m.FoodDetailsPageModule)
   },
 ];
 

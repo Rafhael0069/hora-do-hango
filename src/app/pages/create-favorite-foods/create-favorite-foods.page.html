@@ -7,17 +7,22 @@
 <ion-content>
   <div class="content">
     <div class="img-food">
-      <ion-avatar (click)="choseImage()">
-        <ion-img id="imageViewFood" *ngIf="imageUrlView !== null; else placheolder_avatar;" [src]="imageUrlView"></ion-img>
+      <div class="image-view">
+        <ion-img id="imageViewFood" *ngIf="imageUrlView !== null; else placheolder_avatar;" [src]="imageUrlView">
+        </ion-img>
         <ng-template #placheolder_avatar>
-          <ion-fab-button class="fallback">
-            <ion-icon name="camera"></ion-icon>
-          </ion-fab-button>
+          <div class="fallback">
+            <ion-icon name="image-outline"></ion-icon>
+          </div>
         </ng-template>
-      </ion-avatar>
+      </div>
       <div class="images-selet">
-        <ion-icon name="images-outline"></ion-icon>
-        <ion-icon name="camera-outline"></ion-icon>
+        <div class="icon-box" (click)="choseImage()">
+          <ion-icon name="folder-open-outline"></ion-icon>
+        </div>
+        <div class="icon-box" (click)="takePicture()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </div>
       </div>
     </div>
 
@@ -36,7 +41,8 @@
 
       <div class="buttons">
         <ion-button type="submit" class="button" fill="outline" [disabled]="foodForm.invalid">Registrar</ion-button>
-        <ion-button class="button" fill="outline"(click)="openPageHome()" >Cancelar</ion-button>
+        <ion-button class="button" fill="outline" (click)="openPageHome()">Cancelar</ion-button>
+        <!-- <ion-button class="button" fill="outline" (click)="getWeek()">Cancelar</ion-button> -->
       </div>
     </form>
   </div>

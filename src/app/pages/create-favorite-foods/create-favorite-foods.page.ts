@@ -3,10 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import {
-  AlertController,
-  LoadingController,
-} from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
@@ -39,11 +36,12 @@ export class CreateFavoriteFoodsPage implements OnInit {
   }
 
   async registerFood() {
-    if(this.image != null){
+    if (this.image != null) {
       const loading = await this.loadingController.create();
       await loading.present();
 
       const imageName = this.imageName();
+      const weekNumber = this.getWeekNunber();
 
       const timeElapsed = Date.now();
       const today = new Date(timeElapsed);
@@ -55,8 +53,12 @@ export class CreateFavoriteFoodsPage implements OnInit {
           `comidas/${imageName}`,
           this.foodForm.value.nameFood,
           this.foodForm.value.mainIngredients,
+          imgUrl,
           today.toLocaleDateString(),
-          this.user.uid
+          weekNumber,
+          imageName.toString(),
+          this.user.uid,
+          0
         );
         if (result) {
           this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -75,16 +77,15 @@ export class CreateFavoriteFoodsPage implements OnInit {
           'Por favor, tente novamente!'
         );
       }
-    }else{
+    } else {
       this.presentAlert(
         'Imagem nâo selecionada',
         'Por favor, selecione uma imagen antes de continuar!'
       );
     }
-
   }
 
-  async choseImage() {
+  async takePicture() {
     this.image = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
@@ -92,6 +93,26 @@ export class CreateFavoriteFoodsPage implements OnInit {
     });
 
     this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
+  }
+
+  async choseImage() {
+    this.image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos, // Camera, Photos or Prompt!
+    });
+
+    this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
+  }
+
+  getWeekNunber() {
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    const days = Math.floor(
+      (currentDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)
+    );
+    return Math.ceil(days / 7);
   }
 
   imageName() {

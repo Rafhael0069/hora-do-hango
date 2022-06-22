@@ -7,7 +7,6 @@
 }
 
 .img-food {
-  border:1px solid blue;
   display: flex;
   width: 100%;
   height: 40%;
@@ -16,17 +15,23 @@
   align-items: center;
 }
 
-ion-avatar {
+.image-view {
   width: 200px;
   height: 200px;
-  border-radius: 10px;
-  border:1px solid red;
+  margin-top: 10px;
+}
+
+.image-view ion-img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .fallback {
-  width: 200px;
-  height: 200px;
-
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgb(69, 138, 228);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,15 +39,28 @@ ion-avatar {
 
 .images-selet{
   width: 100%;
+  height: 70px;
+  margin: 10px 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.images-selet ion-icon{
+.images-selet .icon-box{
+  border-radius: 10%;
+  background-color: rgb(69, 138, 228);
+  width: 45%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-icon{
   width: 40px;
   height: 40px;
 }
+
 .form-main {
   width: 100%;
   height: 60%;

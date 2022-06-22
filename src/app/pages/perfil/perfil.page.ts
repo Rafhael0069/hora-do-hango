@@ -66,7 +66,7 @@ export class PerfilPage implements OnInit {
       `imageUsuarios/${this.user.uid}${imgName}.png`
     );
     if (imgUrl) {
-      const result = await this.dbService.uploadDados(
+      const result = await this.dbService.updateDadosUser(
         pathUserData,
         this.perfilForm.value.name,
         this.perfilForm.value.email,

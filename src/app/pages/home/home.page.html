@@ -4,7 +4,7 @@
       <ion-avatar>
         <img id="imageHome" [src]="profile.imageUrl" />
       </ion-avatar>
-      <ion-title id="homeTitle" >{{profile.name}}</ion-title>
+      <ion-title id="homeTitle">{{profile.name}}</ion-title>
     </ion-header>
     <ion-content>
       <ion-list>
@@ -34,6 +34,19 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
+
+      <!-- (click)="openPageDetails(food.foodUid)" -->
+      <div class="card-container" *ngFor="let food of foods">
+        <ion-card class="card" (click)="openPageDetails(food.foodUid)">
+          <div class="image-view">
+            <ion-img class="img-comida-view" [src]="food.imageUrl"></ion-img>
+          </div>
+          <div class="texts">
+            <ion-title class="nome-comida">{{food.nameFood}}</ion-title>
+            <ion-title class="nome-comida">Votos: {{food.votes}}</ion-title>
+          </div>
+        </ion-card>
+      </div>
 
     </ion-content>
   </div>

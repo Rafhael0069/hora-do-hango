@@ -101,7 +101,7 @@ export class CreateUserPage implements OnInit {
         `imageUsuarios/${user.user.uid}${imgName}.png`
       );
       if (imgUrl) {
-        const result = await this.dbService.uploadDados(
+        const result = await this.dbService.uploadDadosUser(
           pathUserData,
           this.registerForm.value.name,
           this.registerForm.value.email,
