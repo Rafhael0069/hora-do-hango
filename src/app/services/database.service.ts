@@ -5,10 +5,10 @@ import {
   Firestore,
   collection,
   query,
-  where,
   getDocs,
   setDoc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import {
   getDownloadURL,
@@ -17,13 +17,17 @@ import {
   uploadString,
 } from '@angular/fire/storage';
 import { Photo, Camera } from '@capacitor/camera';
-import { Observable } from 'rxjs/internal/Observable';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-  constructor(private firestore: Firestore, private storage: Storage) {}
+  constructor(
+    private firestore: Firestore,
+    private storage: Storage,
+    public alertCtrl: AlertController
+  ) {}
 
   async uploadImage(cameraFile: Photo, pathImg: string) {
     const storageRef = ref(this.storage, pathImg);
@@ -39,13 +43,13 @@ export class DatabaseService {
   }
 
   async uploadDadosUser(
-    endereco: string,
+    pathUser: string,
     name: string,
     email: string,
     imageUrl: string
   ) {
     try {
-      const userDocRef = doc(this.firestore, endereco);
+      const userDocRef = doc(this.firestore, pathUser);
       await setDoc(userDocRef, {
         name,
         email,
@@ -58,13 +62,13 @@ export class DatabaseService {
   }
 
   async updateDadosUser(
-    endereco: string,
+    pathUser: string,
     name: string,
     email: string,
     imageUrl: string
   ) {
     try {
-      const userDocRef = doc(this.firestore, endereco);
+      const userDocRef = doc(this.firestore, pathUser);
       await updateDoc(userDocRef, {
         name,
         email,
@@ -77,11 +81,20 @@ export class DatabaseService {
     }
   }
 
-  async updateDadosUserVotes(endereco: string, lastWeekVote: number) {
+  async updateDadosUserVotes(
+    pathUser: string,
+    pathFood: string,
+    lastWeekVote: number,
+    votes
+  ) {
     try {
-      const userDocRef = doc(this.firestore, endereco);
+      const userDocRef = doc(this.firestore, pathUser);
       await updateDoc(userDocRef, {
         lastWeekVote,
+      });
+      const foodDocRef = doc(this.firestore, pathFood);
+      await updateDoc(foodDocRef, {
+        votes,
       });
       return true;
     } catch (e) {
@@ -90,7 +103,7 @@ export class DatabaseService {
   }
 
   async uploadDadosComida(
-    endereco: string,
+    pathFood: string,
     nameFood: string,
     mainIngredients: string,
     imageUrl: string,
@@ -101,7 +114,7 @@ export class DatabaseService {
     votes: number
   ) {
     try {
-      const userDocRef = doc(this.firestore, endereco);
+      const userDocRef = doc(this.firestore, pathFood);
       await setDoc(userDocRef, {
         nameFood,
         mainIngredients,
@@ -119,37 +132,38 @@ export class DatabaseService {
     }
   }
 
-  async updateDadosComida(endereco: string, votes: number) {
-    try {
-      const userDocRef = doc(this.firestore, endereco);
-      await updateDoc(userDocRef, {
-        votes,
-      });
-      return true;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  async getColectionsComidas(endereco: string) {
-    //const q = query(collection(db, 'cities'), where('capital', '==', true));
-
-    let listFoods: [];
-    const userDocRef = query(collection(this.firestore, endereco));
+  async getColectionsComidas(pathFood: string , currentWeek: number ) {
+    const userDocRef = query(collection(this.firestore, pathFood), where('weekNumber', '==', currentWeek));
     const querySnapshot = await getDocs(userDocRef);
 
     return querySnapshot.docs;
   }
 
-  getUserProfile(endereco: string) {
-    const userDocRef = doc(this.firestore, endereco);
+  getUserProfile(pathUser: string) {
+    const userDocRef = doc(this.firestore, pathUser);
     return docData(userDocRef);
   }
 
-  getFoodList(enereco: string) {
-    const list = collection(this.firestore, enereco);
-    console.log(list);
-    return list;
+  getFoodDetails(pathFood: string) {
+    const userDocRef = doc(this.firestore, pathFood);
+    return docData(userDocRef);
   }
 
+  async presentAlert(title: string, subTitle: string) {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      message: subTitle,
+      buttons: ['OK'],
+    });
+    alert.present();
+  }
+
+  getWeekNunber() {
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    const days = Math.floor(
+      (currentDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)
+    );
+    return Math.ceil(days / 7);
+  }
 }

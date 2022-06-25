@@ -1,3 +1,4 @@
+import { DatabaseService } from 'src/app/services/database.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,6 +22,7 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     private loadingController: LoadingController,
+    private dbService: DatabaseService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -49,18 +51,9 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
       this.loginForm.controls.password.setValue(null);
-      this.presentAlert('Falha no login', 'Por favor, tente novamente!');
+      this.dbService.presentAlert('Falha no login', 'Por favor, tente novamente!');
       await loading.dismiss();
     }
-  }
-
-  async presentAlert(title: string, subTitle: string) {
-    const alert = await this.alertCtrl.create({
-      header: title,
-      message: subTitle,
-      buttons: ['OK'],
-    });
-    alert.present();
   }
 
   async ngOnInit() {

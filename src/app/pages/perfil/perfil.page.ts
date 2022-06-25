@@ -3,9 +3,8 @@ import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
-import { PhotoService } from 'src/app/services/photo.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,10 +20,8 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private auth: Auth,
-    public photoService: PhotoService,
     private dbService: DatabaseService,
     private formBuilder: FormBuilder,
-    private alertCtrl: AlertController,
     private loadingController: LoadingController,
     private router: Router
   ) {
@@ -77,14 +74,14 @@ export class PerfilPage implements OnInit {
         await loading.dismiss();
       } else {
         await loading.dismiss();
-        this.presentAlert(
+        this.dbService.presentAlert(
           'Falha ao salvar dados de usuário',
           'Por favor, tente novamente!'
         );
       }
     } else {
       await loading.dismiss();
-      this.presentAlert(
+      this.dbService.presentAlert(
         'Falha ao salvar imagem',
         'Por favor, tente novamente!'
       );
@@ -99,15 +96,6 @@ export class PerfilPage implements OnInit {
   preenchendoCampos(profile: any) {
     this.perfilForm.controls.name.setValue(profile.name);
     this.perfilForm.controls.email.setValue(profile.email);
-  }
-
-  async presentAlert(title: string, subTitle: string) {
-    const alert = await this.alertCtrl.create({
-      header: title,
-      message: subTitle,
-      buttons: ['OK'],
-    });
-    alert.present();
   }
 
   ngOnInit() {}

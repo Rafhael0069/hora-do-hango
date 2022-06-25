@@ -6,6 +6,23 @@
 
 <ion-content>
 
-  <ion-button expand="block" fill="outline" (click)="openPageHome()">Voltar</ion-button>
+  <ion-card>
+    <img [src]="imageFoodUrl" />
+    <ion-card-header>
+      <ion-card-title id="nameFood"></ion-card-title>
+      <div class="votes">
+        <ion-card-subtitle>Votos</ion-card-subtitle>
+        <ion-card-subtitle id="votes"></ion-card-subtitle>
+      </div>
+    </ion-card-header>
+    <ion-card-content  id="foodIngredientes">
 
+    </ion-card-content>
+  </ion-card>
+
+
+  <div class="buttons">
+    <ion-button id="bntVote" expand="block" fill="outline" (click)="voteFood()">Votar nesse prato</ion-button>
+    <ion-button expand="block" fill="outline" (click)="openPageHome()">Cancelar</ion-button>
+  </div>
 </ion-content>
