@@ -1,28 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>FoodDetails</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
-  <ion-card>
-    <img [src]="imageFoodUrl" />
-    <ion-card-header>
-      <ion-card-title id="nameFood"></ion-card-title>
-      <div class="votes">
-        <ion-card-subtitle>Votos</ion-card-subtitle>
-        <ion-card-subtitle id="votes"></ion-card-subtitle>
-      </div>
-    </ion-card-header>
-    <ion-card-content  id="foodIngredientes">
-
-    </ion-card-content>
-  </ion-card>
+  <div class="card-content">
+    <ion-card>
+      <img [src]="imageFoodUrl" />
+      <ion-card-header>
+        <ion-card-title id="nameFood"></ion-card-title>
+        <div class="votes">
+          <ion-card-subtitle>Votos</ion-card-subtitle>
+          <ion-card-subtitle id="votes"></ion-card-subtitle>
+        </div>
+      </ion-card-header>
+      <ion-card-content id="foodIngredientes"></ion-card-content>
+    </ion-card>
+  </div>
 
 
   <div class="buttons">
-    <ion-button id="bntVote" expand="block" fill="outline" (click)="voteFood()">Votar nesse prato</ion-button>
-    <ion-button expand="block" fill="outline" (click)="openPageHome()">Cancelar</ion-button>
+    <button id="bntVote" (click)="voteFood()">Votar nesse prato</button>
+    <button class="cancel" [routerLink]="['/home']">Cancelar</button>
   </div>
 </ion-content>

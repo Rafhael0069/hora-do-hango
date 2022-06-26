@@ -45,6 +45,8 @@ export class DatabaseService {
   async uploadDadosUser(
     pathUser: string,
     name: string,
+
+    matriculation: string,
     email: string,
     imageUrl: string
   ) {
@@ -52,6 +54,7 @@ export class DatabaseService {
       const userDocRef = doc(this.firestore, pathUser);
       await setDoc(userDocRef, {
         name,
+        matriculation,
         email,
         imageUrl,
       });
@@ -64,6 +67,7 @@ export class DatabaseService {
   async updateDadosUser(
     pathUser: string,
     name: string,
+    matriculation: string,
     email: string,
     imageUrl: string
   ) {
@@ -72,6 +76,7 @@ export class DatabaseService {
       await updateDoc(userDocRef, {
         name,
         email,
+        matriculation,
         imageUrl,
         lastWeekVote: 0,
       });

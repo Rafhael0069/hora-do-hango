@@ -1,9 +1,10 @@
 <ion-content>
   <div class="content">
-    <div class="img-perfil">
 
+    <div class="img-perfil">
       <ion-avatar (click)="takePicture()">
-        <ion-img id="imageViewPerfil" *ngIf="imageUrlView !== null; else placheolder_avatar;" [src]="imageUrlView"></ion-img>
+        <ion-img *ngIf="imageUrlView !== null; else placheolder_avatar;" [src]="imageUrlView">
+        </ion-img>
         <ng-template #placheolder_avatar>
           <ion-fab-button class="fallback">
             <ion-icon name="camera"></ion-icon>
@@ -11,24 +12,51 @@
         </ng-template>
       </ion-avatar>
     </div>
-    <form class="login" [formGroup]="registerForm" (ngSubmit)="registerUser()">
 
-      <ion-item fill="solid" class="input ion-margin-bottom">
-        <ion-input type="text" class="input-field" placeholder="Nome Completo" formControlName="name"></ion-input>
-      </ion-item>
-      <ion-item fill="solid" class="input ion-margin-bottom">
-        <ion-input type="email" class="input-field" placeholder="Email" formControlName="email"></ion-input>
-      </ion-item>
-      <ion-item fill="solid" class="input ion-margin-bottom">
-        <ion-input type="password" class="input-field" placeholder="Senha" formControlName="password"></ion-input>
-      </ion-item>
-      <ion-item fill="solid" class="input ion-margin-bottom">
-        <ion-input type="password" class="input-field" placeholder="Confimar senha" formControlName="confirmPassword">
-        </ion-input>
+    <form class="register" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="person-outline"></ion-icon>
+          Nome Completo
+        </ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
 
-      <ion-button type="submit" class="button" fill="outline" [disabled]="registerForm.invalid">Criar conta</ion-button>
-      <ion-button class="button" fill="outline" [routerLink]="['/login']">Cancelar</ion-button>
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="id-card-outline"></ion-icon>
+          Matrícula
+        </ion-label>
+        <ion-input type="text" formControlName="matriculation"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="at-outline"></ion-icon>
+          E-mail
+        </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="key-outline"></ion-icon>
+          Senha
+        </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="key-outline"></ion-icon>
+          Confimar senha
+        </ion-label>
+        <ion-input type="password" formControlName="confirmPassword"></ion-input>
+      </ion-item>
+
+      <button type="submit" [disabled]="registerForm.invalid">Criar conta</button>
+      <button class="cancel" [routerLink]="['/login']">Cancelar</button>
     </form>
   </div>
 </ion-content>

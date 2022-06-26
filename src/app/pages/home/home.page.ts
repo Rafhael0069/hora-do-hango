@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
 
 
   openPagePerfil() {
-    this.router.navigateByUrl('/perfil', { replaceUrl: true });
+    this.router.navigateByUrl('/profile', { replaceUrl: true });
   }
 
   openPageDetails(id: string) {

@@ -1,4 +1,3 @@
-import { DatabaseService } from 'src/app/services/database.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,7 +21,6 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     private loadingController: LoadingController,
-    private dbService: DatabaseService,
     private authService: AuthService,
     private router: Router
   ) {

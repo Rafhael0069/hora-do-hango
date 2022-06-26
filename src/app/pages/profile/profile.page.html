@@ -1,0 +1,40 @@
+<ion-content>
+  <div class="content">
+    <div class="img-perfil">
+      <ion-avatar (click)="takePicture()">
+        <img [src]="imageUrlView" />
+      </ion-avatar>
+    </div>
+
+    <form class="profile" [formGroup]="profileForm" (ngSubmit)="saveDataUser()">
+      <div class="fields">
+        <ion-item>
+          <ion-label>
+            <ion-icon name="person-outline"></ion-icon>
+          </ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="id-card-outline"></ion-icon>
+          </ion-label>
+          <ion-input type="text" formControlName="matriculation"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="at-outline"></ion-icon>
+          </ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+      </div>
+      <div class="buttons">
+        <button type="submit">Salvar alterações</button>
+        <button class="cancel" [routerLink]="['/home']">Cancelar</button>
+      </div>
+    </form>
+
+  </div>
+
+</ion-content>

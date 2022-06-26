@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>create-favorite-foods</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <div class="content">
     <div class="img-food">
@@ -26,23 +20,22 @@
       </div>
     </div>
 
-    <form class="form-main" [formGroup]="foodForm" (ngSubmit)="registerFood()">
+    <form class="register-food" [formGroup]="foodForm" (ngSubmit)="registerFood()">
       <div class="fields">
         <ion-item>
           <ion-label position="floating">Nome do prato</ion-label>
-          <ion-input type="text" class="input-field" formControlName="nameFood"></ion-input>
+          <ion-input type="text"  formControlName="nameFood"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Pricioais ingredientes</ion-label>
-          <ion-textarea rows="6" type="area" class="input-field" formControlName="mainIngredients"></ion-textarea>
+          <ion-textarea rows="6" formControlName="mainIngredients"></ion-textarea>
         </ion-item>
       </div>
 
       <div class="buttons">
-        <ion-button type="submit" class="button" fill="outline" [disabled]="foodForm.invalid">Registrar</ion-button>
-        <ion-button class="button" fill="outline" (click)="openPageHome()">Cancelar</ion-button>
-        <!-- <ion-button class="button" fill="outline" (click)="getWeek()">Cancelar</ion-button> -->
+        <button type="submit"[disabled]="foodForm.invalid">Registrar</button>
+        <button class="cancel" [routerLink]="['/home']">Cancelar</button>
       </div>
     </form>
   </div>

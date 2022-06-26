@@ -4,15 +4,6 @@
   box-sizing: border-box;
 }
 
-:root {
-  --ion-safe-area-top: 20px;
-  --ion-safe-area-bottom: 22px;
-}
-
-.my-custom-menu {
-  --width: 500px;
-}
-
 .header {
   display: flex;
   flex-direction: column;
@@ -29,6 +20,29 @@
 .header ion-title {
   font-size: 2rem;
   margin: 5px 0;
+  color: #2a2a2a;
+}
+
+ion-list{
+  background: #e5e5e5;
+}
+
+ion-list ion-item{
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+
+ion-item ion-icon{
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  color: #2a2a2a;
+}
+
+ion-item ion-label{
+  font-size: 1.5rem;
+  color: #2a2a2a;
 }
 
 .card-container {
@@ -39,8 +53,7 @@
 }
 
 .card {
-  border: 1px solid rgb(128, 128, 128);
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 5px;
   margin-bottom: 14px;
   display: flex;
@@ -60,6 +73,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  color: #2a2a2a;
 }
 
 .card ion-img {

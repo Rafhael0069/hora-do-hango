@@ -7,10 +7,11 @@
 }
 
 .img-perfil{
-  margin-bottom: 10px;
-  margin-top: 10px;
+  width: 100%;
+  height: 35%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 ion-avatar {
@@ -18,32 +19,22 @@ ion-avatar {
   height: 200px;
 }
 
-.fallback {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.register {
+.profile {
   width: 90%;
+  height: 65%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-.register ion-item {
+.profile ion-item {
   border-radius: 15px;
   width: 100%;
   margin-bottom: 10px;
 }
 
-.register ion-item ion-label {
+.profile ion-item ion-label {
   font-size: 1.8rem;
   color: #2a2a2a;
   display: flex;
@@ -51,13 +42,17 @@ ion-avatar {
   align-items: center;
 }
 
-.register ion-item ion-label ion-icon {
+.profile ion-item ion-label ion-icon {
   margin-right: 8px;
 }
 
-.register ion-item ion-input {
+.profile ion-item ion-input {
   font-size: 1.8rem;
   color: #2a2a2a;
+}
+
+.profile .buttons {
+  margin-bottom: 20px;
 }
 
 button {
@@ -70,13 +65,9 @@ button {
   font-size: 2rem;
 }
 
-button:disabled{
-  opacity: 0.5;
-}
-
 .cancel{
   border: 3px solid #dc3545;
   color: #dc3545;
   background: #e5e5e5;
-  margin-top: 5px;
+  margin-top: 15px;
 }

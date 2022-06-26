@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { LoadingController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
 })
-export class PerfilPage implements OnInit {
-  perfilForm: FormGroup;
+export class ProfilePage implements OnInit {
+  profileForm: FormGroup;
   profile = null;
   image = null;
   imageUrlView = null;
@@ -34,8 +34,9 @@ export class PerfilPage implements OnInit {
         this.displayUserData(data);
       });
 
-    this.perfilForm = this.formBuilder.group({
+    this.profileForm = this.formBuilder.group({
       name: [null],
+      matriculation: [null],
       email: [null],
     });
   }
@@ -56,16 +57,43 @@ export class PerfilPage implements OnInit {
 
     const imgName = `${this.user.uid}.png`;
     const pathUserData = `usuarios/${this.user.uid}`;
-    const imgUrl = await this.dbService.uploadImage(
-      this.image,
-      `imageUsuarios/${this.user.uid}${imgName}.png`
-    );
-    if (imgUrl) {
+    if (this.image != null) {
+      const imgUrl = await this.dbService.uploadImage(
+        this.image,
+        `imageUsuarios/${this.user.uid}${imgName}.png`
+      );
+      if (imgUrl) {
+        const result = await this.dbService.updateDadosUser(
+          pathUserData,
+          this.profileForm.value.name,
+          this.profileForm.value.matriculation,
+          this.profileForm.value.email,
+          imgUrl
+        );
+        if (result) {
+          this.router.navigateByUrl('/home', { replaceUrl: true });
+          await loading.dismiss();
+        } else {
+          await loading.dismiss();
+          this.dbService.presentAlert(
+            'Falha ao salvar dados de usuário',
+            'Por favor, tente novamente!'
+          );
+        }
+      } else {
+        await loading.dismiss();
+        this.dbService.presentAlert(
+          'Falha ao salvar imagem',
+          'Por favor, tente novamente!'
+        );
+      }
+    } else {
       const result = await this.dbService.updateDadosUser(
         pathUserData,
-        this.perfilForm.value.name,
-        this.perfilForm.value.email,
-        imgUrl
+        this.profileForm.value.name,
+        this.profileForm.value.matriculation,
+        this.profileForm.value.email,
+        this.imageUrlView
       );
       if (result) {
         this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -77,22 +105,13 @@ export class PerfilPage implements OnInit {
           'Por favor, tente novamente!'
         );
       }
-    } else {
-      await loading.dismiss();
-      this.dbService.presentAlert(
-        'Falha ao salvar imagem',
-        'Por favor, tente novamente!'
-      );
     }
   }
 
-  openPageHome() {
-    this.router.navigateByUrl('/home', { replaceUrl: true });
-  }
-
   displayUserData(profile: any) {
-    this.perfilForm.controls.name.setValue(profile.name);
-    this.perfilForm.controls.email.setValue(profile.email);
+    this.profileForm.controls.name.setValue(profile.name);
+    this.profileForm.controls.matriculation.setValue(profile.matriculation);
+    this.profileForm.controls.email.setValue(profile.email);
   }
 
   ngOnInit() {}

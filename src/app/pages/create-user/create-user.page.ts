@@ -6,7 +6,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
-import { ValidateConfirmPassword } from 'src/validators/confirmPassword';
+import { ValidateConfirmPassword } from 'src/app/validators/confirmPassword';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.page.html',
@@ -28,6 +28,7 @@ export class CreateUserPage implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(5)]],
+      matriculation: [null, [Validators.required, Validators.minLength(5)]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [
@@ -53,6 +54,7 @@ export class CreateUserPage implements OnInit {
         const result = await this.dbService.uploadDadosUser(
           pathUserData,
           this.registerForm.value.name,
+          this.registerForm.value.matriculation,
           this.registerForm.value.email,
           imgUrl
         );
