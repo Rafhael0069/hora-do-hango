@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
     private auth: Auth,
     private dbService: DatabaseService,
     private router: Router,
-    public navCtrl: NavController
+    private navCtrl: NavController
   ) {
     this.user = this.auth.currentUser;
     this.dbService
@@ -41,17 +41,6 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
-  showData(data: any) {
-    let cardView = document.getElementById('card-container').innerHTML;
-    cardView =
-      cardView +
-      `<div class="card">
-      <ion-img src="${data.imageUrl}"></ion-img>
-      <ion-title >${data.nameFood}</ion-title>
-    </div>`;
-
-    document.getElementById('card-container').innerHTML = cardView;
-  }
 
   openPagePerfil() {
     this.router.navigateByUrl('/perfil', { replaceUrl: true });

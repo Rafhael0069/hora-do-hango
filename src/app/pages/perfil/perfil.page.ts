@@ -31,7 +31,7 @@ export class PerfilPage implements OnInit {
       .subscribe((data) => {
         this.profile = data;
         this.imageUrlView = this.profile.imageUrl;
-        this.preenchendoCampos(data);
+        this.displayUserData(data);
       });
 
     this.perfilForm = this.formBuilder.group({
@@ -40,8 +40,7 @@ export class PerfilPage implements OnInit {
     });
   }
 
-  async changeImage() {
-
+  async takePicture() {
     this.image = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
@@ -49,7 +48,6 @@ export class PerfilPage implements OnInit {
     });
 
     this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
-
   }
 
   async saveDataUser() {
@@ -86,14 +84,13 @@ export class PerfilPage implements OnInit {
         'Por favor, tente novamente!'
       );
     }
-
   }
 
   openPageHome() {
     this.router.navigateByUrl('/home', { replaceUrl: true });
   }
 
-  preenchendoCampos(profile: any) {
+  displayUserData(profile: any) {
     this.perfilForm.controls.name.setValue(profile.name);
     this.perfilForm.controls.email.setValue(profile.email);
   }

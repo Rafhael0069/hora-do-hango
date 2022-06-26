@@ -10,6 +10,7 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./food-details.page.scss'],
 })
 export class FoodDetailsPage implements OnInit {
+
   foodDetails = null;
   currentVotes;
   profile = null;
@@ -38,11 +39,11 @@ export class FoodDetailsPage implements OnInit {
       });
     this.route.queryParams.subscribe((params) => {
       this.uidFood = params.uidFood;
-      this.showDetails(this.uidFood);
+      this.displayDetailsOnScreen(this.uidFood);
     });
   }
 
-  async showDetails(uidFood: string) {
+  async displayDetailsOnScreen(uidFood: string) {
     const loading = await this.loadingController.create();
     await loading.present();
     this.dbService
@@ -82,7 +83,7 @@ export class FoodDetailsPage implements OnInit {
     await loading.present();
 
     const newVotes = this.currentVotes + 1;
-    const result = await this.dbService.updateDadosUserVotes(
+    const result = await this.dbService.updateDadosVotes(
       `usuarios/${this.user.uid}`,
       `comidas/${this.uidFood}`,
       this.currentWeek,

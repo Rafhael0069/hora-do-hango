@@ -32,14 +32,6 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
   async login() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -51,7 +43,6 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
       this.loginForm.controls.password.setValue(null);
-      this.dbService.presentAlert('Falha no login', 'Por favor, tente novamente!');
       await loading.dismiss();
     }
   }

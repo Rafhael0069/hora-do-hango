@@ -1,3 +1,4 @@
+import { DatabaseService } from 'src/app/services/database.service';
 import { Injectable } from '@angular/core';
 import {
   Auth,
@@ -11,7 +12,7 @@ import { AlertController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, public alertCtrl: AlertController) {}
+  constructor(private auth: Auth, private dbService: DatabaseService) {}
 
   async register({ email, password }) {
     try {
@@ -23,16 +24,15 @@ export class AuthService {
       return user;
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        this.presentAlert('Error', 'E-mail ja cadastrado');
+        this.dbService.presentAlert('Error', 'E-mail ja cadastrado');
       } else if (error.code === 'auth/weak-password') {
-        this.presentAlert('Error', 'Essa senha é muito facil.');
+        this.dbService.presentAlert('Error', 'Essa senha é muito facil.');
       } else {
-        this.presentAlert('Error', error.message);
+        this.dbService.presentAlert('Error', error.message);
       }
       return null;
     }
   }
-
 
   async login({ email, password }) {
     try {
@@ -40,25 +40,16 @@ export class AuthService {
       return user;
     } catch (error) {
       if (error.code === 'auth/user-disabled') {
-        this.presentAlert('Error', 'Esse usuário foi desabilitado.');
+        this.dbService.presentAlert('Error', 'Esse usuário foi desabilitado.');
       } else if (error.code === 'auth/user-not-found') {
-        this.presentAlert('Error', 'Usuário não encontrado.');
+        this.dbService.presentAlert('Error', 'Usuário não encontrado.');
       } else if (error.code === 'auth/wrong-password') {
-        this.presentAlert('Error', 'Senha incorreta. digite nivamente.');
+        this.dbService.presentAlert('Error', 'Senha incorreta. digite nivamente.');
       } else {
-        this.presentAlert('Error', error.message);
+        this.dbService.presentAlert('Error', error.message);
       }
       return null;
     }
-  }
-
-  async presentAlert(title: string, subTitle: string) {
-    const alert = await this.alertCtrl.create({
-      header: title,
-      message: subTitle,
-      buttons: ['OK'],
-    });
-    alert.present();
   }
 
   logout() {

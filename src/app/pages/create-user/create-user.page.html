@@ -2,7 +2,7 @@
   <div class="content">
     <div class="img-perfil">
 
-      <ion-avatar (click)="changeImage()">
+      <ion-avatar (click)="takePicture()">
         <ion-img id="imageViewPerfil" *ngIf="imageUrlView !== null; else placheolder_avatar;" [src]="imageUrlView"></ion-img>
         <ng-template #placheolder_avatar>
           <ion-fab-button class="fallback">
@@ -11,7 +11,7 @@
         </ng-template>
       </ion-avatar>
     </div>
-    <form class="login" [formGroup]="registerForm" (ngSubmit)="register()">
+    <form class="login" [formGroup]="registerForm" (ngSubmit)="registerUser()">
 
       <ion-item fill="solid" class="input ion-margin-bottom">
         <ion-input type="text" class="input-field" placeholder="Nome Completo" formControlName="name"></ion-input>

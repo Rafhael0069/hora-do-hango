@@ -81,7 +81,7 @@ export class DatabaseService {
     }
   }
 
-  async updateDadosUserVotes(
+  async updateDadosVotes(
     pathUser: string,
     pathFood: string,
     lastWeekVote: number,

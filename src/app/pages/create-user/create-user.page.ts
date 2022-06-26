@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import {
-  LoadingController,
-} from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 import { ValidateConfirmPassword } from 'src/validators/confirmPassword';
@@ -15,6 +13,7 @@ import { ValidateConfirmPassword } from 'src/validators/confirmPassword';
   styleUrls: ['./create-user.page.scss'],
 })
 export class CreateUserPage implements OnInit {
+
   profile = null;
   image = null;
   imageUrlView = null;
@@ -38,7 +37,7 @@ export class CreateUserPage implements OnInit {
     });
   }
 
-  async register() {
+  async registerUser() {
     const loading = await this.loadingController.create();
     await loading.present();
 
@@ -76,14 +75,10 @@ export class CreateUserPage implements OnInit {
       }
     } else {
       await loading.dismiss();
-      this.dbService.presentAlert(
-        'Falha ao cadastra usuario',
-        'Por favor, tente novamente!'
-      );
     }
   }
 
-  async changeImage() {
+  async takePicture() {
     this.image = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
