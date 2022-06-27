@@ -23,7 +23,7 @@
         <ion-input type="password" class="input-field" formControlName="password"></ion-input>
       </ion-item>
 
-      <ion-button color="none" type="submit" [disabled]="loginForm.invalid">Entrar</ion-button>
+      <button color="none" type="submit" [disabled]="loginForm.invalid">Entrar</button>
 
       <p>Não tem conta ainda, <a [routerLink]="['/create-user']">Cadastre-se</a></p>
 

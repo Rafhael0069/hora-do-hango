@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.rafhael.dev',
   appName: 'Hora do Rango',
   webDir: 'www',
   bundledWebRuntime: false
