@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.loginForm.controls.email.setValue('rafhael@teste.com');
-    this.loginForm.controls.password.setValue('123456');
+    /* this.loginForm.controls.email.setValue('rafhael@teste.com');
+    this.loginForm.controls.password.setValue('123456'); */
   }
 }
