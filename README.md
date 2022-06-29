@@ -24,7 +24,7 @@ Depois de instalado o ionic podemos começar o desenvolvimento do app.
 Abra o PowerShell ou o cmd na pasta onde você deseja salvar o projeto e execute o seguinte comando.
 <strong><pre>ionic start hora-do-rango blank --type=angular</pre></strong>
 
-<h2>Instalando as bibliotecas e dependências<h2>
+<h2>Instalando as bibliotecas e dependências</h2>
 
 Abra a pasta do projeto no VsCode e abra o terminal para instalarmos as bibliotecas necessárias executando os seguintes comandos.
 
@@ -47,7 +47,7 @@ Para criar o projeto no firebase siga os seguintes passos.
 
 <strong><pre>images do firebase</pre></strong>
 
-<h2>Instalando o AnglarFire e conectando o app ao firebase<h2>
+<h2>Instalando o AnglarFire e conectando o app ao firebase</h2>
 
 Uma vez criado projeto no firebase iremos  conectar o app ionic ao projeto no firebase utilizando a biblioteca do AngularFire, que é uma excelente ferramenta para integrar o firebase ou seu app ionic.
 
@@ -86,7 +86,7 @@ export const environment = {
 
 isso conclui nossas configurações iniciais.
 
-<h2>Início da codificação de html e scss nas páginas do app<h2>
+<h2>Início da codificação de html e scss nas páginas do app</h2>
 
 Começaremos com a criação das páginas utilizando os seguintes comandos.
 <strong><pre>ionic g page pages/login</pre></strong>
@@ -949,7 +949,7 @@ button:disabled{
 }
 ```
 
-<h2>Criação dos services<h2>
+<h2>Criação dos services</h2>
 
 Os services serão os arquivos auxiliares que manterão os métodos que serão utilizados em mais de uma página.
 
@@ -1257,7 +1257,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-<h2>Iniciando implementações dos métodos para cada página.<h2>
+<h2>Iniciando implementações dos métodos para cada página.</h2>
 
 login.page.ts
 ```ts
