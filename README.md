@@ -17,7 +17,12 @@ Esse tutorial utiliza o ionic na versão: 6.19.0
 Antes de continuar, certifique-se de que seu computador tenha o Node.js instalado. Consulte estas instruções para configurar um ambiente para o Ionic.
 
 Instale o Ionic CLI com npm:
+
+
+```html
 <strong><pre>npm install -g @ionic/cli</pre></strong>
+```
+
 
 Depois de instalado o ionic podemos começar o desenvolvimento do app.
 
