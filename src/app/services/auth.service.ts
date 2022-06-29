@@ -6,7 +6,6 @@ import {
   createUserWithEmailAndPassword,
   signOut,
 } from '@angular/fire/auth';
-import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',

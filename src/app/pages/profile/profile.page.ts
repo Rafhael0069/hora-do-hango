@@ -51,6 +51,17 @@ export class ProfilePage implements OnInit {
     this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
   }
 
+  async choseImage() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos, // Camera, Photos or Prompt!
+    });
+
+    this.imageUrlView = 'data:image/jpg;base64,' + image.base64String;
+  }
+
   async saveDataUser() {
     const loading = await this.loadingController.create();
     await loading.present();

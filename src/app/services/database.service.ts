@@ -45,7 +45,6 @@ export class DatabaseService {
   async uploadDadosUser(
     pathUser: string,
     name: string,
-
     matriculation: string,
     email: string,
     imageUrl: string
@@ -90,7 +89,7 @@ export class DatabaseService {
     pathUser: string,
     pathFood: string,
     lastWeekVote: number,
-    votes
+    votes: number
   ) {
     try {
       const userDocRef = doc(this.firestore, pathUser);
@@ -137,8 +136,11 @@ export class DatabaseService {
     }
   }
 
-  async getColectionsComidas(pathFood: string , currentWeek: number ) {
-    const userDocRef = query(collection(this.firestore, pathFood), where('weekNumber', '==', currentWeek));
+  async getColectionsComidas(pathFood: string, currentWeek: number) {
+    const userDocRef = query(
+      collection(this.firestore, pathFood),
+      where('weekNumber', '==', currentWeek)
+    );
     const querySnapshot = await getDocs(userDocRef);
 
     return querySnapshot.docs;

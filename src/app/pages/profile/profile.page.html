@@ -1,12 +1,28 @@
 <ion-content>
   <div class="content">
+
     <div class="img-perfil">
-      <ion-avatar (click)="takePicture()">
-        <img [src]="imageUrlView" />
+      <ion-avatar>
+        <ion-img [src]="imageUrlView">
+        </ion-img>
+        <ng-template #placheolder_avatar>
+          <ion-fab-button class="fallback">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ng-template>
       </ion-avatar>
+      <div class="images-selet">
+        <div class="icon-box" (click)="choseImage()">
+          <ion-icon name="folder-open-outline"></ion-icon>
+        </div>
+        <div class="icon-box" (click)="takePicture()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </div>
+      </div>
     </div>
 
     <form class="profile" [formGroup]="profileForm" (ngSubmit)="saveDataUser()">
+
       <div class="fields">
         <ion-item>
           <ion-label>
@@ -29,6 +45,7 @@
           <ion-input type="email" formControlName="email"></ion-input>
         </ion-item>
       </div>
+      
       <div class="buttons">
         <button type="submit">Salvar alterações</button>
         <button class="cancel" [routerLink]="['/home']">Cancelar</button>

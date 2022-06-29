@@ -9,7 +9,6 @@ import {
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
-//const redirectLoggedInToHome = () => redirectLoggedInTo(['food-details']);
 
 const routes: Routes = [
   {
