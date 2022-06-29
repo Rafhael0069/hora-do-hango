@@ -27,24 +27,36 @@ npm install -g @ionic/cli
 Depois de instalado o ionic podemos começar o desenvolvimento do app.
 
 Abra o PowerShell ou o cmd na pasta onde você deseja salvar o projeto e execute o seguinte comando.
-<strong><pre>ionic start hora-do-rango blank --type=angular</pre></strong>
+
+```html
+ionic start hora-do-rango blank --type=angular
+```
 
 <h2>Instalando as bibliotecas e dependências</h2>
 
 Abra a pasta do projeto no VsCode e abra o terminal para instalarmos as bibliotecas necessárias executando os seguintes comandos.
 
-<strong><pre>npm install @ionic/pwa-elements</pre></strong>
-
-<strong><pre>npm install @capacitor/camera</pre></strong>
-
-<strong><pre>npm install @capacitor/filesystem</pre></strong>
-
-<strong><pre>npm install @capacitor/storage</pre></strong>
+```html
+npm install @ionic/pwa-elements
+```
+```html
+npm install @capacitor/camera
+```
+```html
+npm install @capacitor/filesystem
+```
+```html
+npm install @capacitor/storage
+```
 
 Execute os seguintes comandos para correção de quaisquer problemas de sobreposição de dependências que possam vir a ocorrer.
 
-<strong><pre>npm run build</pre></strong>
-<strong><pre>npx cap sync</pre></strong>
+```html
+npm run build
+```
+```html
+npx cap sync
+```
 
 <h2>Criação do projeto no firebase</h2>
 
@@ -58,10 +70,15 @@ Uma vez criado projeto no firebase iremos  conectar o app ionic ao projeto no fi
 
 Vamos começar instalando as dependências no projeto ionic utilizando os seguintes comandos.
 
-<strong><pre>npm install firebase @angular/fire --save</pre></strong>
+```html
+npm install firebase @angular/fire --save
+```
 
 Depois vamos utilizar o seguinte comando para adicionar as dependências corretas.
-<strong><pre>ng add @angular/fire</pre></strong>
+
+```html
+ng add @angular/fire
+```
 
 Utilizando a tecla de espaço selecione as seguintes opções “Cloud Storage, Authetication, Firestore” e depois pressione enter.
 
@@ -94,11 +111,22 @@ isso conclui nossas configurações iniciais.
 <h2>Início da codificação de html e scss nas páginas do app</h2>
 
 Começaremos com a criação das páginas utilizando os seguintes comandos.
-<strong><pre>ionic g page pages/login</pre></strong>
-<strong><pre>ionic g page pages/create-user</pre></strong>
-<strong><pre>ionic g page pages/profile</pre></strong>
-<strong><pre>ionic g page pages/create-favorite-food</pre></strong>
-<strong><pre>ionic g page pages/food-details</pre></strong>
+
+```html
+ionic g page pages/login
+```
+```html
+ionic g page pages/create-user
+```
+```html
+ionic g page pages/profile
+```
+```html
+ionic g page pages/create-favorite-food
+```
+```html
+ionic g page pages/food-details
+```
 
 Isso criará uma pasta somente para as páginas, arraste também a página de home para dentro da mesma.
 
@@ -959,8 +987,13 @@ button:disabled{
 Os services serão os arquivos auxiliares que manterão os métodos que serão utilizados em mais de uma página.
 
 Utilize os seguintes comandos para criação dos services.
-<strong><pre>ionic g service services/auth</pre></strong>
-<strong><pre>ionic g service services/database</pre></strong>
+
+```html
+ionic g service services/auth
+```
+```html
+ionic g service services/database
+```
 
 e adicionar os seguintes blocos de códigos.
 
@@ -1860,20 +1893,31 @@ export class FoodDetailsPage implements OnInit {
 Uma vez tendo concluído o código até aqui, vamos começar o processo de geração do apk.
 para começar abrir novamente o terminal e executar os seguintes comandos
 
-<strong><pre>npm install @capacitor/core @capacitor/cli</pre></strong>
+```html
+npm install @capacitor/core @capacitor/cli
+```
 
 Então execute o seguinte comando para criar os arquivos necessários
-<strong><pre>npx cap init</pre></strong>
+```html
+npx cap init
+```
 
 Escolha o nome do app que irá aparecer na tela do celular, e também o package dos arquivos.
 
 Adicionando o android ao projeto.
-<strong><pre>npx cap add android</pre></strong>
+```html
+npx cap add android
+```
 
 Executando novamente os comandos para correção de quaisquer problemas de sobreposição de dependências que possam vir a ocorrer.
 
-<strong><pre>npm run build</pre></strong>
-<strong><pre>npx cap sync</pre></strong>
+```html
+npm run build
+```
+
+```html
+npx cap sync
+```
 
 Quando concluído terá uma pasta android no seu projeto, então agora vamos abrir o Android Studio no projeto recém criado.
 
