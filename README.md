@@ -20,7 +20,7 @@ Instale o Ionic CLI com npm:
 
 
 ```html
-<strong><pre>npm install -g @ionic/cli</pre></strong>
+npm install -g @ionic/cli
 ```
 
 
