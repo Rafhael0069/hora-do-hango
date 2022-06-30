@@ -23,11 +23,6 @@ Instale o Ionic CLI com npm:
 npm install -g @ionic/cli
 ```
 
-```html
-<strong><pre>images do firebase</pre></strong>
-```
-
-
 Depois de instalado o ionic podemos começar o desenvolvimento do app.
 
 Abra o PowerShell ou o cmd na pasta onde você deseja salvar o projeto e execute o seguinte comando.
@@ -82,9 +77,9 @@ Para criar o projeto no firebase siga os seguintes passos.
 
 <h2>Instalando o AnglarFire e conectando o app ao firebase</h2>
 
-Uma vez criado projeto no firebase iremos  conectar o app ionic ao projeto no firebase utilizando a biblioteca do AngularFire, que é uma excelente ferramenta para integrar o firebase ou seu app ionic.
+Uma vez criado projeto no firebase iremos  conectar o app ionic ao projeto no firebase utilizando a biblioteca do [AngularFire](https://github.com/angular/angularfire), que é uma excelente ferramenta para integrar o firebase ou seu app ionic.
 
-Vamos começar instalando as dependências no projeto ionic utilizando os seguintes comandos.
+Vamos começar instalando a biblioteca no projeto ionic utilizando os seguintes comandos.
 
 ```html
 npm install firebase @angular/fire --save
