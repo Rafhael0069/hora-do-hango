@@ -1,4 +1,4 @@
-<h3>Hora do rango - 13-06-2022</h3>
+<h1># Hora do Rango</h1>
 
 Este tutorial irá mostrar o desenvolvimento de um aplicativo simples com ionic e firebase,
 Antes de iniciar você já precisa ter instalado em sua máquina os seguintes software.
