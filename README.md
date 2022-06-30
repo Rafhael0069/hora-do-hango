@@ -1,6 +1,6 @@
-<h1># Hora do Rango</h1>
+<h1>Hora do Rango</h1>
 
-Este tutorial irá mostrar o desenvolvimento de um aplicativo simples com ionic e firebase,
+Este tutorial irá mostrar o desenvolvimento de um aplicativo simples com [Ionic](https://ionic.io/) e [Firebase](https://firebase.google.com/),
 Antes de iniciar você já precisa ter instalado em sua máquina os seguintes software.
 
 [Visual Studio Code](https://code.visualstudio.com/)<br>
