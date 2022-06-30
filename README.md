@@ -3,9 +3,9 @@
 Este tutorial irá mostrar o desenvolvimento de um aplicativo simples com ionic e firebase,
 Antes de iniciar você já precisa ter instalado em sua máquina os seguintes software.
 
-[Visual Studio Code](https://code.visualstudio.com/)
-[Android Studio ](https://developer.android.com/studio)
-[Node.js®](https://nodejs.org/en/)
+[Visual Studio Code](https://code.visualstudio.com/)<br>
+[Android Studio ](https://developer.android.com/studio)<br>
+[Node.js®](https://nodejs.org/en/)<br>
 
 Uma vez que você já tenha instalado os softwares anteriores, vamos começar com a instalação do Ionic.
 
@@ -21,6 +21,10 @@ Instale o Ionic CLI com npm:
 
 ```html
 npm install -g @ionic/cli
+```
+
+```html
+<strong><pre>images do firebase</pre></strong>
 ```
 
 
@@ -61,8 +65,20 @@ npx cap sync
 <h2>Criação do projeto no firebase</h2>
 
 Para criar o projeto no firebase siga os seguintes passos.
-
-<strong><pre>images do firebase</pre></strong>
+<div>
+  <img src="src/assets/images/Firebase 1-1.png" width="500"/>
+  <img src="src/assets/images/Firebase 2.png" width="500"/>
+</div>
+<div>
+  <img src="src/assets/images/Firebase 3.png" width="500"/>
+  <img src="src/assets/images/Firebase 4.png" width="500"/>
+  
+</div>
+<div>
+  <img src="src/assets/images/Firebase 5.png" width="500"/>
+  <img src="src/assets/images/Firebase 6.png" width="500"/>
+</div>
+  <img src="src/assets/images/Firebase 7.png" width="500"/>
 
 <h2>Instalando o AnglarFire e conectando o app ao firebase</h2>
 
@@ -82,11 +98,12 @@ ng add @angular/fire
 
 Utilizando a tecla de espaço selecione as seguintes opções “Cloud Storage, Authetication, Firestore” e depois pressione enter.
 
-<strong><pre>images do dependencia do Angularfire</pre></strong>
+<img src="src/assets/images/AngularFire 1.png" width="800"/>
 
 depois de finalizado isso o arquivo app.module.ts estará assim.
 
-<strong><pre>images do app.module.ts</pre></strong>
+
+<img src="src/assets/images/appmodule.png" width="500"/>
 
 Insira as chaves de configuração do Firebase no arquivo (production environment) environment.ts.
 
@@ -1931,4 +1948,14 @@ no AndroidManifest.xml adicione as seguintes permissões.
 
 selecione seu ícone de app, e então comece o build do apk
 
-<strong><pre>images da build do apk no android studio</pre></strong>
+<div>
+  <img src="src/assets/images/AndroidStudio 1.png" width="500"/>
+  <img src="src/assets/images/AndroidStudio 2.png" width="500"/>
+</div>
+<div>
+  <img src="src/assets/images/AndroidStudio 3.png" width="500"/>
+  <img src="src/assets/images/AndroidStudio 4.png" width="500"/>
+</div>
+  <img src="src/assets/images/AndroidStudio 5.png" width="500"/>
+  
+ Pronto seu app ionic está finalizado.
