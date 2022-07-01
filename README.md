@@ -479,55 +479,56 @@ home.page.scss
   margin: 0;
   box-sizing: border-box;
 }
- 
+
 .header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
- 
+
 .header ion-avatar {
   width: 200px;
   height: 200px;
   margin: 10px 0;
 }
- 
+
 .header ion-title {
+  width: 100%;
   font-size: 2rem;
   margin: 5px 0;
   color: #2a2a2a;
 }
- 
+
 ion-list{
   background: #e5e5e5;
 }
- 
+
 ion-list ion-item{
   margin-bottom: 10px;
   border-radius: 5px;
 }
- 
- 
+
+
 ion-item ion-icon{
   margin-right: 10px;
   width: 40px;
   height: 40px;
   color: #2a2a2a;
 }
- 
+
 ion-item ion-label{
   font-size: 1.5rem;
   color: #2a2a2a;
 }
- 
+
 .card-container {
   width: 100%;
   height: 120px;
   margin: 0;
   padding: 0;
 }
- 
+
 .card {
   border-radius: 8px;
   padding: 5px;
@@ -537,30 +538,35 @@ ion-item ion-label{
   align-items: center;
   box-shadow: 5px 5px 5px rgb(128, 128, 128);
 }
- 
+
 .card .image-view {
   width: 30%;
 }
- 
+
 .card .texts {
   width: 70%;
   height: 100px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   color: #2a2a2a;
 }
- 
+
 .card ion-img {
   width: 100px;
   height: 100px;
   object-fit: cover;
 }
- 
+
 .card ion-title {
+  width: 100%;
   padding-left: 2px;
   font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 ```
 
