@@ -574,13 +574,29 @@ profile.page.html
 ```html
 <ion-content>
   <div class="content">
+
     <div class="img-perfil">
-      <ion-avatar (click)="takePicture()">
-        <img [src]="imageUrlView" />
+      <ion-avatar>
+        <ion-img [src]="imageUrlView">
+        </ion-img>
+        <ng-template #placheolder_avatar>
+          <ion-fab-button class="fallback">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ng-template>
       </ion-avatar>
+      <div class="images-selet">
+        <div class="icon-box" (click)="choseImage()">
+          <ion-icon name="folder-open-outline"></ion-icon>
+        </div>
+        <div class="icon-box" (click)="takePicture()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </div>
+      </div>
     </div>
- 
+
     <form class="profile" [formGroup]="profileForm" (ngSubmit)="saveDataUser()">
+
       <div class="fields">
         <ion-item>
           <ion-label>
@@ -588,14 +604,14 @@ profile.page.html
           </ion-label>
           <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>
- 
+
         <ion-item>
           <ion-label>
             <ion-icon name="id-card-outline"></ion-icon>
           </ion-label>
           <ion-input type="text" formControlName="matriculation"></ion-input>
         </ion-item>
- 
+
         <ion-item>
           <ion-label>
             <ion-icon name="at-outline"></ion-icon>
@@ -603,14 +619,15 @@ profile.page.html
           <ion-input type="email" formControlName="email"></ion-input>
         </ion-item>
       </div>
+      
       <div class="buttons">
         <button type="submit">Salvar alterações</button>
         <button class="cancel" [routerLink]="['/home']">Cancelar</button>
       </div>
     </form>
- 
+
   </div>
- 
+
 </ion-content>
 ```
 
@@ -623,35 +640,78 @@ profile.page.scss
   flex-direction: column;
   align-items: center;
 }
- 
+
 .img-perfil{
   width: 100%;
-  height: 35%;
+  height: 45%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 15px;
 }
- 
+
 ion-avatar {
   width: 200px;
   height: 200px;
 }
- 
+
+ion-avatar ion-img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.fallback {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.images-selet{
+  width: 100%;
+  height: 70px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.images-selet .icon-box{
+  border-radius: 10%;
+  color: #FFF;
+  background: #007065;
+  width: 45%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-icon{
+  width: 40px;
+  height: 40px;
+}
+
 .profile {
   width: 90%;
-  height: 65%;
+  height: 55%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
- 
+
 .profile ion-item {
   border-radius: 15px;
   width: 100%;
   margin-bottom: 10px;
 }
- 
+
 .profile ion-item ion-label {
   font-size: 1.8rem;
   color: #2a2a2a;
@@ -659,22 +719,27 @@ ion-avatar {
   justify-content: left;
   align-items: center;
 }
- 
+
 .profile ion-item ion-label ion-icon {
   margin-right: 8px;
 }
- 
+
 .profile ion-item ion-input {
   font-size: 1.8rem;
   color: #2a2a2a;
 }
- 
+
 .profile .buttons {
+  width: 100%;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
- 
+
 button {
-  width: 96%;
+  width: 100%;
   height: 50px;
   border-radius: 8px;
   padding: 5px;
@@ -682,7 +747,7 @@ button {
   background: #007065;
   font-size: 2rem;
 }
- 
+
 .cancel{
   border: 3px solid #dc3545;
   color: #dc3545;
@@ -1089,6 +1154,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  orderBy,
 } from '@angular/fire/firestore';
 import {
   getDownloadURL,
@@ -1098,7 +1164,7 @@ import {
 } from '@angular/fire/storage';
 import { Photo, Camera } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
- 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -1108,20 +1174,20 @@ export class DatabaseService {
     private storage: Storage,
     public alertCtrl: AlertController
   ) {}
- 
+
   async uploadImage(cameraFile: Photo, pathImg: string) {
     const storageRef = ref(this.storage, pathImg);
- 
+
     try {
       await uploadString(storageRef, cameraFile.base64String, 'base64');
- 
+
       const imageUrl = await getDownloadURL(storageRef);
       return imageUrl;
     } catch (e) {
       return null;
     }
   }
- 
+
   async uploadDadosUser(
     pathUser: string,
     name: string,
@@ -1142,7 +1208,7 @@ export class DatabaseService {
       return null;
     }
   }
- 
+
   async updateDadosUser(
     pathUser: string,
     name: string,
@@ -1164,7 +1230,7 @@ export class DatabaseService {
       return null;
     }
   }
- 
+
   async updateDadosVotes(
     pathUser: string,
     pathFood: string,
@@ -1185,7 +1251,7 @@ export class DatabaseService {
       return null;
     }
   }
- 
+
   async uploadDadosComida(
     pathFood: string,
     nameFood: string,
@@ -1215,27 +1281,28 @@ export class DatabaseService {
       return null;
     }
   }
- 
+
   async getColectionsComidas(pathFood: string, currentWeek: number) {
     const userDocRef = query(
       collection(this.firestore, pathFood),
-      where('weekNumber', '==', currentWeek)
+      where('weekNumber', '==', currentWeek),
+      orderBy('dataPublicaca', 'desc')
     );
     const querySnapshot = await getDocs(userDocRef);
- 
+
     return querySnapshot.docs;
   }
- 
+
   getUserProfile(pathUser: string) {
     const userDocRef = doc(this.firestore, pathUser);
     return docData(userDocRef);
   }
- 
+
   getFoodDetails(pathFood: string) {
     const userDocRef = doc(this.firestore, pathFood);
     return docData(userDocRef);
   }
- 
+
   async presentAlert(title: string, subTitle: string) {
     const alert = await this.alertCtrl.create({
       header: title,
@@ -1244,7 +1311,7 @@ export class DatabaseService {
     });
     alert.present();
   }
- 
+
   getWeekNunber() {
     const currentDate = new Date();
     const startDate = new Date(currentDate.getFullYear(), 0, 1);
@@ -1563,7 +1630,7 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { LoadingController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
- 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -1575,7 +1642,7 @@ export class ProfilePage implements OnInit {
   image = null;
   imageUrlView = null;
   user;
- 
+
   constructor(
     private auth: Auth,
     private dbService: DatabaseService,
@@ -1591,28 +1658,39 @@ export class ProfilePage implements OnInit {
         this.imageUrlView = this.profile.imageUrl;
         this.displayUserData(data);
       });
- 
+
     this.profileForm = this.formBuilder.group({
       name: [null],
       matriculation: [null],
       email: [null],
     });
   }
- 
+
   async takePicture() {
     this.image = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
       quality: 100,
     });
- 
+
     this.imageUrlView = 'data:image/jpg;base64,' + this.image.base64String;
   }
- 
+
+  async choseImage() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos, // Camera, Photos or Prompt!
+    });
+
+    this.imageUrlView = 'data:image/jpg;base64,' + image.base64String;
+  }
+
   async saveDataUser() {
     const loading = await this.loadingController.create();
     await loading.present();
- 
+
     const imgName = `${this.user.uid}.png`;
     const pathUserData = `usuarios/${this.user.uid}`;
     if (this.image != null) {
@@ -1665,13 +1743,13 @@ export class ProfilePage implements OnInit {
       }
     }
   }
- 
+
   displayUserData(profile: any) {
     this.profileForm.controls.name.setValue(profile.name);
     this.profileForm.controls.matriculation.setValue(profile.matriculation);
     this.profileForm.controls.email.setValue(profile.email);
   }
- 
+
   ngOnInit() {}
 }
 ```
