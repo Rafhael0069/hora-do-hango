@@ -62,7 +62,7 @@ export class FoodDetailsPage implements OnInit {
   async voteFood() {
     const alert = await this.alertCtrl.create({
       header: 'Comfirmar voto.',
-      message: 'Voce tem certeza que deseja votar nesse prato?',
+      message: 'Você tem certeza que deseja votar nesta sobremesa?',
       buttons: [
         {
           text: 'Sim',
@@ -71,7 +71,7 @@ export class FoodDetailsPage implements OnInit {
           },
         },
         {
-          text: 'Cancelar',
+          text: 'Não',
         },
       ],
     });

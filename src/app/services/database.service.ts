@@ -9,6 +9,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  orderBy,
 } from '@angular/fire/firestore';
 import {
   getDownloadURL,
@@ -139,7 +140,8 @@ export class DatabaseService {
   async getColectionsComidas(pathFood: string, currentWeek: number) {
     const userDocRef = query(
       collection(this.firestore, pathFood),
-      where('weekNumber', '==', currentWeek)
+      where('weekNumber', '==', currentWeek),
+      orderBy('dataPublicaca', 'desc')
     );
     const querySnapshot = await getDocs(userDocRef);
 
